@@ -20,7 +20,10 @@ requirements:
   run:
     - python {{ python }}
     - treetime
+    - Biopython
+    - scikit-bio
     - pandas
+    - numpy
     - altair
     - qiime2 {{ release }}.*
     - q2-types {{ release }}.*
