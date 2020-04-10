@@ -1,0 +1,36 @@
+{% set data = load_setup_py_data() %}
+{% set version = data.get('version') or 'placehold' %}
+{% set release = '.'.join(version.split('.')[:2]) %}
+
+package:
+  name: q2-treetime
+  version: {{ version }}
+
+source:
+  path: ../..
+
+build:
+  script: make install
+
+requirements:
+  host:
+    - python {{ python }}
+    - setuptools
+
+  run:
+    - python {{ python }}
+    - treetime
+    - pandas
+    - altair
+    - qiime2 {{ release }}.*
+    - q2-types {{ release }}.*
+
+test:
+  imports:
+    - q2_treetime
+    - qiime2.plugins.treetime
+
+about:
+  home: https://qiime2.org
+  license: BSD-3-Clause
+  license_family: BSD
